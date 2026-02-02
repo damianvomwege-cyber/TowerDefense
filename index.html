@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tower Defense - Mini</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="topbar">
+        <div class="brand">
+          <div class="logo">TD</div>
+          <div>
+            <div class="title">Tower Defense</div>
+            <div class="subtitle">Einfaches Spiel mit vielen Details</div>
+          </div>
+        </div>
+        <div class="stats">
+          <div class="stat">
+            <span>Geld</span>
+            <strong id="money">0</strong>
+          </div>
+          <div class="stat">
+            <span>Leben</span>
+            <strong id="lives">0</strong>
+          </div>
+          <div class="stat">
+            <span>Welle</span>
+            <strong id="wave">0</strong>
+          </div>
+          <div class="stat">
+            <span>Tempo</span>
+            <strong id="speed">1x</strong>
+          </div>
+        </div>
+        <div class="controls">
+          <button id="startWave">Welle starten</button>
+          <button id="autoWave">Auto-Welle: Aus</button>
+          <button id="toggleSpeed">Schneller</button>
+          <button id="pause">Pause</button>
+        </div>
+      </header>
+
+      <main class="content">
+        <section class="board">
+          <canvas id="game" width="768" height="512"></canvas>
+          <div class="legend">
+            <div class="legend-item">
+              <span class="swatch path"></span> Pfad
+            </div>
+            <div class="legend-item">
+              <span class="swatch grass"></span> Baufläche
+            </div>
+          </div>
+        </section>
+
+        <aside class="panel">
+          <div class="panel-block">
+            <h3>Tower bauen</h3>
+            <p class="hint">Wähle einen Tower und klicke auf eine freie Fläche.</p>
+            <div class="tower-list">
+              <button class="tower-btn" data-tower="gun">
+                <span class="tower-name">Kanone</span>
+                <span class="tower-cost">80</span>
+              </button>
+              <button class="tower-btn" data-tower="rapid">
+                <span class="tower-name">Schnellfeuer</span>
+                <span class="tower-cost">95</span>
+              </button>
+              <button class="tower-btn" data-tower="sniper">
+                <span class="tower-name">Scharfschuetze</span>
+                <span class="tower-cost">170</span>
+              </button>
+              <button class="tower-btn" data-tower="slow">
+                <span class="tower-name">Frost</span>
+                <span class="tower-cost">110</span>
+              </button>
+              <button class="tower-btn" data-tower="splash">
+                <span class="tower-name">Splitter</span>
+                <span class="tower-cost">140</span>
+              </button>
+              <button class="tower-btn" data-tower="mortar">
+                <span class="tower-name">Moerser</span>
+                <span class="tower-cost">210</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="panel-block">
+            <h3>Auswahl</h3>
+            <div id="selection" class="selection">
+              <p>Kein Tower ausgewählt.</p>
+            </div>
+            <div class="selection-actions">
+              <button id="upgrade" disabled>Upgrade</button>
+              <button id="sell" disabled>Verkaufen</button>
+            </div>
+          </div>
+
+          <div class="panel-block">
+            <h3>Nächste Welle</h3>
+            <div id="wavePreview" class="wave-preview">Bereit.</div>
+          </div>
+
+          <div class="panel-block">
+            <h3>Tipps</h3>
+            <ul class="tips">
+              <li>Frost-Tower verlangsamen Gegner dauerhaft.</li>
+              <li>Scharfschuetzen treffen aus sehr grosser Reichweite.</li>
+              <li>Splitter-Tower machen Flächenschaden.</li>
+              <li>Upgrades erhöhen Reichweite und Schaden.</li>
+            </ul>
+          </div>
+        </aside>
+      </main>
+
+      <footer class="footer">
+        <span>Links: platzieren</span>
+        <span>Rechts: abwählen</span>
+        <span>Shift: Reichweite anzeigen</span>
+      </footer>
+    </div>
+
+    <script src="js/constants.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/state.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/towers.js"></script>
+    <script src="js/waves.js"></script>
+    <script src="js/combat.js"></script>
+    <script src="js/render.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/input.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
+
