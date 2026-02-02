@@ -34,6 +34,13 @@
             <strong id="speed">1x</strong>
           </div>
         </div>
+        <div class="account">
+          <span class="account-label">Account</span>
+          <div class="account-row">
+            <strong id="authStatus">Gast</strong>
+            <button id="authLogout" disabled>Logout</button>
+          </div>
+        </div>
         <div class="controls">
           <button id="startWave">Welle starten</button>
           <button id="autoWave">Auto-Welle: Aus</button>
@@ -217,10 +224,64 @@
         </div>
       </div>
     </div>
+
+    <div class="modal auth-modal" id="authModal" aria-hidden="true">
+      <div class="modal-backdrop"></div>
+      <div class="modal-card auth-card" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+        <h3 id="authTitle">Login Pflicht</h3>
+        <div class="auth-tabs">
+          <button id="authTabLogin" class="active">Login</button>
+          <button id="authTabRegister">Registrieren</button>
+          <button id="authTabVerify">Verifizieren</button>
+        </div>
+
+        <div class="auth-section" id="authLoginSection">
+          <label class="modal-label" for="authLoginEmail">Email</label>
+          <input id="authLoginEmail" type="email" autocomplete="username" />
+          <label class="modal-label" for="authLoginPassword">Passwort</label>
+          <input id="authLoginPassword" type="password" autocomplete="current-password" />
+          <div class="auth-error" id="authLoginError"></div>
+          <div class="auth-actions">
+            <button id="authLoginSubmit">Einloggen</button>
+            <button id="authToVerify" class="text-button">Email verifizieren</button>
+          </div>
+        </div>
+
+        <div class="auth-section" id="authRegisterSection">
+          <label class="modal-label" for="authRegisterName">Name</label>
+          <input id="authRegisterName" type="text" autocomplete="name" />
+          <label class="modal-label" for="authRegisterEmail">Email</label>
+          <input id="authRegisterEmail" type="email" autocomplete="email" />
+          <label class="modal-label" for="authRegisterPassword">Passwort</label>
+          <input id="authRegisterPassword" type="password" autocomplete="new-password" />
+          <label class="modal-label" for="authRegisterConfirm">Passwort bestaetigen</label>
+          <input id="authRegisterConfirm" type="password" autocomplete="new-password" />
+          <div class="auth-error" id="authRegisterError"></div>
+          <div class="auth-actions">
+            <button id="authRegisterSubmit">Registrieren</button>
+          </div>
+        </div>
+
+        <div class="auth-section" id="authVerifySection">
+          <label class="modal-label" for="authVerifyEmail">Email</label>
+          <input id="authVerifyEmail" type="email" autocomplete="email" />
+          <label class="modal-label" for="authVerifyCode">Code</label>
+          <input id="authVerifyCode" type="text" inputmode="numeric" />
+          <div class="auth-hint" id="authVerifyHint">
+            Code gesendet. Demo-Code: <span id="authDemoCode">----</span>
+          </div>
+          <div class="auth-error" id="authVerifyError"></div>
+          <div class="auth-actions">
+            <button id="authVerifySubmit">Verifizieren</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <script src='js/constants.js'></script>
     <script src="js/utils.js"></script>
     <script src="js/state.js"></script>
     <script src="js/ui.js"></script>
+    <script src="js/auth.js"></script>
     <script src="js/towers.js"></script>
     <script src="js/waves.js"></script>
     <script src="js/combat.js"></script>

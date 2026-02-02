@@ -16,6 +16,10 @@
   });
 
   canvas.addEventListener("click", () => {
+    if (TD.auth && !TD.auth.isAuthenticated) {
+      TD.auth.showModal("login");
+      return;
+    }
     if (TD.state.gameOver) {
       TD.game.reset();
       return;
@@ -54,6 +58,10 @@
   });
 
   TD.dom.startWaveBtn.addEventListener("click", () => {
+    if (TD.auth && !TD.auth.isAuthenticated) {
+      TD.auth.showModal("login");
+      return;
+    }
     if (TD.state.gameOver) {
       TD.game.reset();
       return;
@@ -62,6 +70,10 @@
   });
 
   TD.dom.autoWaveBtn.addEventListener("click", () => {
+    if (TD.auth && !TD.auth.isAuthenticated) {
+      TD.auth.showModal("login");
+      return;
+    }
     TD.settings.autoWave = !TD.settings.autoWave;
     TD.ui.setAutoWaveLabel(TD.settings.autoWave);
     if (TD.settings.autoWave && !TD.currentWave && TD.enemies.length === 0) {

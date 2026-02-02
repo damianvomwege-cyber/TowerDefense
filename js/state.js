@@ -23,6 +23,11 @@
     damageMultiplier: 1,
   };
 
+  TD.auth = {
+    isAuthenticated: false,
+    user: null,
+  };
+
   TD.buildState = {
     mode: null,
   };

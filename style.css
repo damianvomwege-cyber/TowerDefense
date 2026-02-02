@@ -104,6 +104,25 @@ body {
   flex-wrap: wrap;
 }
 
+.account {
+  display: grid;
+  gap: 6px;
+  min-width: 140px;
+}
+
+.account-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+}
+
+.account-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 button {
   border: none;
   color: #141826;
@@ -376,6 +395,70 @@ canvas {
   display: grid;
   gap: 10px;
   z-index: 1;
+}
+
+.auth-card {
+  width: min(420px, 90vw);
+}
+
+.auth-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.auth-tabs button {
+  background: linear-gradient(135deg, #28365a, #1a2238);
+  color: var(--text);
+}
+
+.auth-tabs button.active {
+  outline: 2px solid var(--accent-2);
+  box-shadow: 0 0 0 4px rgba(79, 209, 197, 0.15);
+}
+
+.auth-section {
+  display: none;
+  gap: 8px;
+}
+
+.auth-section.active {
+  display: grid;
+}
+
+.auth-error {
+  min-height: 16px;
+  font-size: 12px;
+  color: var(--danger);
+}
+
+.auth-hint {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.auth-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.text-button {
+  background: none;
+  border: none;
+  color: var(--accent-2);
+  padding: 0;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.text-button:hover {
+  filter: brightness(1.1);
+}
+
+.auth-modal {
+  z-index: 60;
 }
 
 .modal-card h3 {

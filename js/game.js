@@ -22,6 +22,11 @@
   function loop(now) {
     const dt = Math.min(0.04, (now - lastTime) / 1000);
     lastTime = now;
+    if (!TD.auth || !TD.auth.isAuthenticated) {
+      TD.render.render();
+      requestAnimationFrame(loop);
+      return;
+    }
     TD.combat.update(dt);
     TD.render.render();
     requestAnimationFrame(loop);
