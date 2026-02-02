@@ -1,1 +1,3 @@
 C*Users*known_hosts
+node_modules/
+.env

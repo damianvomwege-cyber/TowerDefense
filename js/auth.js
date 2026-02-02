@@ -28,7 +28,6 @@
     verifyEmail: document.getElementById("authVerifyEmail"),
     verifyCode: document.getElementById("authVerifyCode"),
     verifyHint: document.getElementById("authVerifyHint"),
-    demoCode: document.getElementById("authDemoCode"),
     verifyError: document.getElementById("authVerifyError"),
     verifySubmit: document.getElementById("authVerifySubmit"),
     status: document.getElementById("authStatus"),
@@ -73,6 +72,29 @@
 
   function generateCode() {
     return Math.floor(100000 + Math.random() * 900000).toString();
+  }
+
+  const API_BASE =
+    location.origin && location.origin !== "null" ? location.origin : "http://localhost:3000";
+
+  function setVerifyHint(message) {
+    dom.verifyHint.textContent = message;
+  }
+
+  async function sendVerificationEmail(email, name, code) {
+    try {
+      const response = await fetch(`${API_BASE}/api/send-code`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, name, code }),
+      });
+      if (!response.ok) {
+        throw new Error("send-failed");
+      }
+      return true;
+    } catch (error) {
+      return false;
+    }
   }
 
   function showSection(section) {
@@ -127,7 +149,7 @@
     if (!user.verified) {
       dom.loginError.textContent = "Email noch nicht verifiziert.";
       dom.verifyEmail.value = email;
-      dom.demoCode.textContent = user.code || "----";
+      setVerifyHint("Code gesendet. Bitte Email pruefen.");
       showSection("verify");
       return;
     }
@@ -182,9 +204,15 @@
     saveUsers(users);
 
     dom.verifyEmail.value = email;
-    dom.demoCode.textContent = code;
     dom.verifyCode.value = "";
     dom.verifyError.textContent = "";
+    sendVerificationEmail(email, name, code).then((sent) => {
+      if (sent) {
+        setVerifyHint("Code gesendet. Bitte Email pruefen.");
+      } else {
+        setVerifyHint(`Email Versand fehlgeschlagen. Code: ${code}`);
+      }
+    });
     showSection("verify");
   }
 
@@ -208,7 +236,7 @@
 
     if (user.code !== code) {
       dom.verifyError.textContent = "Code ist falsch.";
-      dom.demoCode.textContent = user.code || "----";
+      setVerifyHint(`Code gesendet. Bitte Email pruefen.`);
       return;
     }
 
@@ -234,7 +262,7 @@
     dom.loginError.textContent = "";
     dom.registerError.textContent = "";
     dom.verifyError.textContent = "";
-    dom.demoCode.textContent = "----";
+    setVerifyHint("");
     setAuth(null);
   }
 
