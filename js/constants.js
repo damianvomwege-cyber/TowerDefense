@@ -114,10 +114,16 @@
     titan: { hp: 420, speed: 24, reward: 45, size: 18, color: "#6ee7b7" },
   };
 
+  const ADMIN_AUTH = {
+    name: "Damian vom wege",
+    password: "Admin@2024!",
+  };
+
   TD.const = { TILE, GRID_COLS, GRID_ROWS };
   TD.pathTiles = PATH_TILES;
   TD.pathPoints = PATH_POINTS;
   TD.pathSet = PATH_SET;
   TD.towerTypes = TOWER_TYPES;
   TD.enemyTypes = ENEMY_TYPES;
+  TD.adminAuth = ADMIN_AUTH;
 })();

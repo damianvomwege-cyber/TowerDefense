@@ -12,6 +12,19 @@
     autoWaveBtn: document.getElementById("autoWave"),
     toggleSpeedBtn: document.getElementById("toggleSpeed"),
     pauseBtn: document.getElementById("pause"),
+    adminStatus: document.getElementById("adminStatus"),
+    adminActions: document.getElementById("adminActions"),
+    adminLogin: document.getElementById("adminLogin"),
+    adminMoney: document.getElementById("adminMoney"),
+    adminLives: document.getElementById("adminLives"),
+    adminSkip: document.getElementById("adminSkip"),
+    adminModal: document.getElementById("adminModal"),
+    adminBackdrop: document.getElementById("adminBackdrop"),
+    adminName: document.getElementById("adminName"),
+    adminPassword: document.getElementById("adminPassword"),
+    adminError: document.getElementById("adminError"),
+    adminSubmit: document.getElementById("adminSubmit"),
+    adminCancel: document.getElementById("adminCancel"),
     selectionEl: document.getElementById("selection"),
     upgradeBtn: document.getElementById("upgrade"),
     sellBtn: document.getElementById("sell"),
@@ -71,6 +84,34 @@
     dom.autoWaveBtn.textContent = enabled ? "Auto-Welle: An" : "Auto-Welle: Aus";
   }
 
+  function setAdminState(enabled) {
+    dom.adminStatus.textContent = enabled ? "Admin: An" : "Admin: Aus";
+    dom.adminStatus.classList.toggle("active", enabled);
+    dom.adminLogin.textContent = enabled ? "Admin aktiv" : "Admin Login";
+    dom.adminLogin.disabled = enabled;
+    dom.adminMoney.disabled = !enabled;
+    dom.adminLives.disabled = !enabled;
+    dom.adminSkip.disabled = !enabled;
+  }
+
+  function showAdminModal() {
+    dom.adminModal.classList.add("show");
+    dom.adminModal.setAttribute("aria-hidden", "false");
+    dom.adminError.textContent = "";
+    dom.adminName.value = "";
+    dom.adminPassword.value = "";
+    dom.adminName.focus();
+  }
+
+  function hideAdminModal() {
+    dom.adminModal.classList.remove("show");
+    dom.adminModal.setAttribute("aria-hidden", "true");
+  }
+
+  function setAdminError(message) {
+    dom.adminError.textContent = message;
+  }
+
   TD.dom = dom;
   TD.ui = {
     updateUI,
@@ -80,5 +121,9 @@
     setWavePreview,
     setPauseLabel,
     setAutoWaveLabel,
+    setAdminState,
+    showAdminModal,
+    hideAdminModal,
+    setAdminError,
   };
 })();

@@ -69,6 +69,70 @@
     }
   });
 
+  function tryAdminLogin() {
+    const name = TD.dom.adminName.value.trim();
+    const password = TD.dom.adminPassword.value;
+    if (name === TD.adminAuth.name && password === TD.adminAuth.password) {
+      TD.admin.enabled = true;
+      TD.ui.setAdminState(true);
+      TD.ui.hideAdminModal();
+    } else {
+      TD.ui.setAdminError("Login fehlgeschlagen.");
+    }
+  }
+
+  TD.dom.adminLogin.addEventListener("click", () => {
+    if (!TD.admin.enabled) {
+      TD.ui.showAdminModal();
+    }
+  });
+
+  TD.dom.adminBackdrop.addEventListener("click", () => {
+    TD.ui.hideAdminModal();
+  });
+
+  TD.dom.adminCancel.addEventListener("click", () => {
+    TD.ui.hideAdminModal();
+  });
+
+  TD.dom.adminSubmit.addEventListener("click", () => {
+    tryAdminLogin();
+  });
+
+  TD.dom.adminName.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      tryAdminLogin();
+    }
+  });
+
+  TD.dom.adminPassword.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      tryAdminLogin();
+    }
+  });
+
+  TD.dom.adminMoney.addEventListener("click", () => {
+    if (!TD.admin.enabled) return;
+    TD.state.money += 500;
+    TD.ui.updateUI();
+  });
+
+  TD.dom.adminLives.addEventListener("click", () => {
+    if (!TD.admin.enabled) return;
+    TD.state.lives += 5;
+    TD.ui.updateUI();
+  });
+
+  TD.dom.adminSkip.addEventListener("click", () => {
+    if (!TD.admin.enabled) return;
+    if (TD.currentWave) {
+      TD.currentWave.queue.length = 0;
+    }
+    TD.enemies.length = 0;
+    TD.projectiles.length = 0;
+    TD.combat.updateWave(0);
+  });
+
   TD.dom.toggleSpeedBtn.addEventListener("click", () => {
     TD.state.speed = TD.state.speed === 1 ? 2 : 1;
     TD.ui.updateUI();

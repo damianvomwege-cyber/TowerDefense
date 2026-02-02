@@ -13,7 +13,7 @@
           <div class="logo">TD</div>
           <div>
             <div class="title">Tower Defense</div>
-            <div class="subtitle">Einfaches Spiel mit vielen Details</div>
+            <div class="subtitle">Ein einfaches Tower Defense Spiel</div>
           </div>
         </div>
         <div class="stats">
@@ -112,6 +112,17 @@
               <li>Upgrades erhöhen Reichweite und Schaden.</li>
             </ul>
           </div>
+          <div class="panel-block">
+            <h3>Admin</h3>
+            <p class="hint">Zugang nur mit Spezial-Login.</p>
+            <div class="admin-status" id="adminStatus">Admin: Aus</div>
+            <div class="admin-actions" id="adminActions">
+              <button id="adminLogin">Admin Login</button>
+              <button id="adminMoney" disabled>+500 Geld</button>
+              <button id="adminLives" disabled>+5 Leben</button>
+              <button id="adminSkip" disabled>Welle ueberspringen</button>
+            </div>
+          </div>
         </aside>
       </main>
 
@@ -122,7 +133,23 @@
       </footer>
     </div>
 
-    <script src="js/constants.js"></script>
+    
+    <div class="modal" id="adminModal" aria-hidden="true">
+      <div class="modal-backdrop" id="adminBackdrop"></div>
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="adminTitle">
+        <h3 id="adminTitle">Admin Login</h3>
+        <label class="modal-label" for="adminName">Name</label>
+        <input id="adminName" type="text" autocomplete="username" />
+        <label class="modal-label" for="adminPassword">Passwort</label>
+        <input id="adminPassword" type="password" autocomplete="current-password" />
+        <div class="modal-error" id="adminError"></div>
+        <div class="modal-actions">
+          <button id="adminSubmit">Einloggen</button>
+          <button id="adminCancel">Abbrechen</button>
+        </div>
+      </div>
+    </div>
+    <script src='js/constants.js'></script>
     <script src="js/utils.js"></script>
     <script src="js/state.js"></script>
     <script src="js/ui.js"></script>
@@ -135,4 +162,6 @@
     <script src="js/main.js"></script>
   </body>
 </html>
+
+
 

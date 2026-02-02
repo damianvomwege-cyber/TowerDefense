@@ -14,6 +14,10 @@
     autoWave: false,
   };
 
+  TD.admin = {
+    enabled: false,
+  };
+
   TD.buildState = {
     mode: null,
   };
