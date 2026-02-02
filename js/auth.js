@@ -33,6 +33,7 @@
     verifySubmit: document.getElementById("authVerifySubmit"),
     status: document.getElementById("authStatus"),
     logout: document.getElementById("authLogout"),
+    reset: document.getElementById("authReset"),
   };
 
   const STORAGE_KEY = "td_users_v1";
@@ -97,6 +98,7 @@
     TD.auth.user = user || null;
     dom.status.textContent = user ? `Eingeloggt: ${user.name}` : "Gast";
     dom.logout.disabled = !user;
+    dom.reset.disabled = !user;
     if (user) {
       hideModal();
     } else {
@@ -223,6 +225,19 @@
     setAuth(null);
   }
 
+  function clearAllAccounts() {
+    if (!confirm("Alle Accounts wirklich loeschen?")) {
+      return;
+    }
+    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(SESSION_KEY);
+    dom.loginError.textContent = "";
+    dom.registerError.textContent = "";
+    dom.verifyError.textContent = "";
+    dom.demoCode.textContent = "----";
+    setAuth(null);
+  }
+
   function init() {
     dom.tabs.login.addEventListener("click", () => showSection("login"));
     dom.tabs.register.addEventListener("click", () => showSection("register"));
@@ -232,6 +247,7 @@
     dom.verifySubmit.addEventListener("click", tryVerify);
     dom.toVerify.addEventListener("click", () => showSection("verify"));
     dom.logout.addEventListener("click", logout);
+    dom.reset.addEventListener("click", clearAllAccounts);
 
     dom.loginPassword.addEventListener("keydown", (event) => {
       if (event.key === "Enter") {
