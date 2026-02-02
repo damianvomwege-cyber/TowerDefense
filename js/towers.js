@@ -31,10 +31,15 @@
 
   function upgradeTower(tower) {
     const cost = getUpgradeCost(tower);
-    if (TD.state.money < cost) {
+    const adminFree = TD.admin.enabled && TD.admin.infiniteMoney;
+    if (!adminFree && TD.state.money < cost) {
       return;
     }
-    TD.state.money -= cost;
+    if (!adminFree) {
+      TD.state.money -= cost;
+    } else {
+      TD.state.money = Math.max(TD.state.money, 9999);
+    }
     tower.level += 1;
     tower.damage *= 1.25;
     tower.range *= 1.08;
@@ -78,10 +83,15 @@
     }
     const type = TD.buildState.mode;
     const base = TD.towerTypes[type];
-    if (TD.state.money < base.cost) {
+    const adminFree = TD.admin.enabled && (TD.admin.freeBuild || TD.admin.infiniteMoney);
+    if (!adminFree && TD.state.money < base.cost) {
       return;
     }
-    TD.state.money -= base.cost;
+    if (!adminFree) {
+      TD.state.money -= base.cost;
+    } else if (TD.admin.infiniteMoney) {
+      TD.state.money = Math.max(TD.state.money, 9999);
+    }
     TD.towers.push(createTower(type, tileX, tileY));
     TD.ui.updateUI();
     TD.ui.updateSelection();
@@ -104,12 +114,13 @@
   }
 
   function shoot(tower, target) {
+    const damageMultiplier = TD.admin.enabled ? TD.admin.damageMultiplier : 1;
     TD.projectiles.push({
       x: tower.x,
       y: tower.y,
       target,
       speed: tower.projectileSpeed,
-      damage: tower.damage,
+      damage: tower.damage * damageMultiplier,
       slow: tower.slow,
       slowDuration: tower.slowDuration,
       splash: tower.splash,

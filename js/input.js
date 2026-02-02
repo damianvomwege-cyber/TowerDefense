@@ -76,6 +76,8 @@
       TD.admin.enabled = true;
       TD.ui.setAdminState(true);
       TD.ui.hideAdminModal();
+      TD.ui.syncAdminPanel();
+      TD.ui.showAdminPanel();
     } else {
       TD.ui.setAdminError("Login fehlgeschlagen.");
     }
@@ -111,19 +113,81 @@
     }
   });
 
-  TD.dom.adminMoney.addEventListener("click", () => {
+  TD.dom.adminPanelOpen.addEventListener("click", () => {
     if (!TD.admin.enabled) return;
-    TD.state.money += 500;
-    TD.ui.updateUI();
+    TD.ui.syncAdminPanel();
+    TD.ui.showAdminPanel();
   });
 
-  TD.dom.adminLives.addEventListener("click", () => {
-    if (!TD.admin.enabled) return;
-    TD.state.lives += 5;
-    TD.ui.updateUI();
+  TD.dom.adminPanelBackdrop.addEventListener("click", () => {
+    TD.ui.hideAdminPanel();
   });
 
-  TD.dom.adminSkip.addEventListener("click", () => {
+  TD.dom.adminPanelClose.addEventListener("click", () => {
+    TD.ui.hideAdminPanel();
+  });
+
+  function readNumber(input, fallback) {
+    const value = Number(input.value);
+    return Number.isFinite(value) ? value : fallback;
+  }
+
+  TD.dom.adminSetMoney.addEventListener("click", () => {
+    if (!TD.admin.enabled) return;
+    TD.state.money = Math.max(0, readNumber(TD.dom.adminMoneyInput, TD.state.money));
+    TD.ui.updateUI();
+    TD.ui.syncAdminPanel();
+  });
+
+  TD.dom.adminGiveMoney.addEventListener("click", () => {
+    if (!TD.admin.enabled) return;
+    TD.state.money += 1000;
+    TD.ui.updateUI();
+    TD.ui.syncAdminPanel();
+  });
+
+  TD.dom.adminInfiniteMoney.addEventListener("change", () => {
+    if (!TD.admin.enabled) return;
+    TD.admin.infiniteMoney = TD.dom.adminInfiniteMoney.checked;
+    if (TD.admin.infiniteMoney) {
+      TD.state.money = Math.max(TD.state.money, 9999);
+      TD.ui.updateUI();
+    }
+  });
+
+  TD.dom.adminSetLives.addEventListener("click", () => {
+    if (!TD.admin.enabled) return;
+    TD.state.lives = Math.max(0, readNumber(TD.dom.adminLivesInput, TD.state.lives));
+    TD.ui.updateUI();
+    TD.ui.syncAdminPanel();
+  });
+
+  TD.dom.adminGiveLives.addEventListener("click", () => {
+    if (!TD.admin.enabled) return;
+    TD.state.lives += 10;
+    TD.ui.updateUI();
+    TD.ui.syncAdminPanel();
+  });
+
+  TD.dom.adminInfiniteLives.addEventListener("change", () => {
+    if (!TD.admin.enabled) return;
+    TD.admin.infiniteLives = TD.dom.adminInfiniteLives.checked;
+    if (TD.admin.infiniteLives && TD.state.lives <= 0) {
+      TD.state.lives = 1;
+      TD.ui.updateUI();
+    }
+  });
+
+  TD.dom.adminSetWave.addEventListener("click", () => {
+    if (!TD.admin.enabled) return;
+    const nextWave = Math.max(0, Math.floor(readNumber(TD.dom.adminWaveInput, TD.state.wave)));
+    TD.state.wave = nextWave;
+    TD.ui.updateUI();
+    TD.ui.setWavePreview(TD.wave.describeWave(TD.state.wave + 1));
+    TD.ui.syncAdminPanel();
+  });
+
+  TD.dom.adminSkipWave.addEventListener("click", () => {
     if (!TD.admin.enabled) return;
     if (TD.currentWave) {
       TD.currentWave.queue.length = 0;
@@ -131,6 +195,40 @@
     TD.enemies.length = 0;
     TD.projectiles.length = 0;
     TD.combat.updateWave(0);
+  });
+
+  TD.dom.adminSpawnBoss.addEventListener("click", () => {
+    if (!TD.admin.enabled) return;
+    TD.wave.spawnEnemy("boss");
+  });
+
+  TD.dom.adminClearEnemies.addEventListener("click", () => {
+    if (!TD.admin.enabled) return;
+    TD.enemies.length = 0;
+    TD.projectiles.length = 0;
+  });
+
+  TD.dom.adminFreeBuild.addEventListener("change", () => {
+    if (!TD.admin.enabled) return;
+    TD.admin.freeBuild = TD.dom.adminFreeBuild.checked;
+  });
+
+  TD.dom.adminFreezeEnemies.addEventListener("change", () => {
+    if (!TD.admin.enabled) return;
+    TD.admin.freezeEnemies = TD.dom.adminFreezeEnemies.checked;
+  });
+
+  TD.dom.adminDamageBoost.addEventListener("input", () => {
+    if (!TD.admin.enabled) return;
+    TD.admin.damageMultiplier = parseFloat(TD.dom.adminDamageBoost.value);
+    TD.ui.syncAdminPanel();
+  });
+
+  TD.dom.adminSpeedControl.addEventListener("input", () => {
+    if (!TD.admin.enabled) return;
+    TD.state.speed = parseFloat(TD.dom.adminSpeedControl.value);
+    TD.ui.updateUI();
+    TD.ui.syncAdminPanel();
   });
 
   TD.dom.toggleSpeedBtn.addEventListener("click", () => {

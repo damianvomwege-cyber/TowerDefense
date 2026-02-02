@@ -112,6 +112,7 @@
     shield: { hp: 260, speed: 28, reward: 30, size: 16, color: "#9aa7ff" },
     swarm: { hp: 45, speed: 90, reward: 7, size: 9, color: "#ffd166" },
     titan: { hp: 420, speed: 24, reward: 45, size: 18, color: "#6ee7b7" },
+    boss: { hp: 1200, speed: 20, reward: 120, size: 22, color: "#ff3b3b" },
   };
 
   const ADMIN_AUTH = {

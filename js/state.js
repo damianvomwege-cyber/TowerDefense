@@ -16,6 +16,11 @@
 
   TD.admin = {
     enabled: false,
+    infiniteMoney: false,
+    infiniteLives: false,
+    freeBuild: false,
+    freezeEnemies: false,
+    damageMultiplier: 1,
   };
 
   TD.buildState = {

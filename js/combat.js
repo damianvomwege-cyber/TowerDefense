@@ -24,14 +24,17 @@
   }
 
   function updateEnemies(dt) {
+    const freeze = TD.admin.enabled && TD.admin.freezeEnemies;
     for (const enemy of TD.enemies) {
       if (enemy.dead) continue;
       const nextPoint = TD.pathPoints[enemy.pathIndex + 1];
       if (!nextPoint) {
         enemy.dead = true;
-        TD.state.lives -= 1;
-        addFloatingText(enemy.x, enemy.y - 6, "-1 Leben", "#ff6b6b");
-        TD.ui.updateUI();
+        if (!(TD.admin.enabled && TD.admin.infiniteLives)) {
+          TD.state.lives -= 1;
+          addFloatingText(enemy.x, enemy.y - 6, "-1 Leben", "#ff6b6b");
+          TD.ui.updateUI();
+        }
         continue;
       }
       if (enemy.slowTimer > 0) {
@@ -39,7 +42,7 @@
       } else {
         enemy.slowFactor = 1;
       }
-      const speed = enemy.speed * enemy.slowFactor;
+      const speed = freeze ? 0 : enemy.speed * enemy.slowFactor;
       const dx = nextPoint.x - enemy.x;
       const dy = nextPoint.y - enemy.y;
       const dist = Math.hypot(dx, dy);
@@ -177,7 +180,11 @@
     ) {
       TD.wave.startWave();
     }
-    if (TD.state.lives <= 0 && !TD.state.gameOver) {
+    if (
+      TD.state.lives <= 0 &&
+      !TD.state.gameOver &&
+      !(TD.admin.enabled && TD.admin.infiniteLives)
+    ) {
       TD.state.gameOver = true;
     }
   }

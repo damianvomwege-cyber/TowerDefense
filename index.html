@@ -118,9 +118,7 @@
             <div class="admin-status" id="adminStatus">Admin: Aus</div>
             <div class="admin-actions" id="adminActions">
               <button id="adminLogin">Admin Login</button>
-              <button id="adminMoney" disabled>+500 Geld</button>
-              <button id="adminLives" disabled>+5 Leben</button>
-              <button id="adminSkip" disabled>Welle ueberspringen</button>
+              <button id="adminPanelOpen" disabled>Admin GUI oeffnen</button>
             </div>
           </div>
         </aside>
@@ -146,6 +144,76 @@
         <div class="modal-actions">
           <button id="adminSubmit">Einloggen</button>
           <button id="adminCancel">Abbrechen</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="adminPanel" aria-hidden="true">
+      <div class="modal-backdrop" id="adminPanelBackdrop"></div>
+      <div class="modal-card admin-panel-card" role="dialog" aria-modal="true" aria-labelledby="adminPanelTitle">
+        <div class="admin-panel-header">
+          <h3 id="adminPanelTitle">Admin GUI</h3>
+          <button id="adminPanelClose">Schliessen</button>
+        </div>
+        <div class="admin-grid">
+          <div class="admin-group">
+            <h4>Economy</h4>
+            <div class="admin-row">
+              <label for="adminMoneyInput">Geld</label>
+              <input id="adminMoneyInput" type="number" min="0" step="50" />
+              <button id="adminSetMoney">Setzen</button>
+            </div>
+            <button id="adminGiveMoney">+1000 Geld</button>
+            <label class="admin-toggle">
+              <input type="checkbox" id="adminInfiniteMoney" />
+              Unendlich Geld
+            </label>
+          </div>
+          <div class="admin-group">
+            <h4>Basis</h4>
+            <div class="admin-row">
+              <label for="adminLivesInput">Leben</label>
+              <input id="adminLivesInput" type="number" min="0" step="1" />
+              <button id="adminSetLives">Setzen</button>
+            </div>
+            <button id="adminGiveLives">+10 Leben</button>
+            <label class="admin-toggle">
+              <input type="checkbox" id="adminInfiniteLives" />
+              Unverwundbar
+            </label>
+          </div>
+          <div class="admin-group">
+            <h4>Wellen</h4>
+            <div class="admin-row">
+              <label for="adminWaveInput">Welle</label>
+              <input id="adminWaveInput" type="number" min="0" step="1" />
+              <button id="adminSetWave">Setzen</button>
+            </div>
+            <button id="adminSkipWave">Welle ueberspringen</button>
+            <button id="adminSpawnBoss">Boss spawnen</button>
+            <button id="adminClearEnemies">Gegner loeschen</button>
+          </div>
+          <div class="admin-group">
+            <h4>Cheats</h4>
+            <label class="admin-toggle">
+              <input type="checkbox" id="adminFreeBuild" />
+              Gratis bauen
+            </label>
+            <label class="admin-toggle">
+              <input type="checkbox" id="adminFreezeEnemies" />
+              Gegner einfrieren
+            </label>
+            <div class="admin-row">
+              <label for="adminDamageBoost">Tower Schaden</label>
+              <input id="adminDamageBoost" type="range" min="1" max="4" step="0.5" />
+              <span id="adminDamageValue">x1.0</span>
+            </div>
+            <div class="admin-row">
+              <label for="adminSpeedControl">Tempo</label>
+              <input id="adminSpeedControl" type="range" min="0.5" max="3" step="0.5" />
+              <span id="adminSpeedValue">x1.0</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

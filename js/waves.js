@@ -25,6 +25,10 @@
     if (waveNumber >= 10) {
       queue.push("titan");
     }
+    if (waveNumber % 20 === 0) {
+      queue.push("boss");
+      queue.push("boss");
+    }
 
     const interval = Math.max(0.35, 0.92 - waveNumber * 0.05);
     return {
