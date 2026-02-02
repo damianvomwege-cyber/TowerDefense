@@ -104,15 +104,15 @@
   };
 
   const ENEMY_TYPES = {
-    grunt: { hp: 80, speed: 50, reward: 10, size: 12, color: "#ff6b6b" },
-    scout: { hp: 55, speed: 75, reward: 9, size: 10, color: "#f6b73c" },
-    runner: { hp: 90, speed: 62, reward: 12, size: 11, color: "#4fd1c5" },
-    tank: { hp: 150, speed: 36, reward: 18, size: 14, color: "#7bd389" },
-    bruiser: { hp: 220, speed: 30, reward: 26, size: 15, color: "#f59f6c" },
-    shield: { hp: 260, speed: 28, reward: 30, size: 16, color: "#9aa7ff" },
-    swarm: { hp: 45, speed: 90, reward: 7, size: 9, color: "#ffd166" },
-    titan: { hp: 420, speed: 24, reward: 45, size: 18, color: "#6ee7b7" },
-    boss: { hp: 1200, speed: 20, reward: 120, size: 22, color: "#ff3b3b" },
+    grunt: { hp: 160, speed: 55, reward: 12, size: 12, color: "#ff6b6b" },
+    scout: { hp: 110, speed: 82, reward: 11, size: 10, color: "#f6b73c" },
+    runner: { hp: 180, speed: 70, reward: 15, size: 11, color: "#4fd1c5" },
+    tank: { hp: 320, speed: 38, reward: 24, size: 14, color: "#7bd389" },
+    bruiser: { hp: 480, speed: 32, reward: 34, size: 15, color: "#f59f6c" },
+    shield: { hp: 560, speed: 30, reward: 38, size: 16, color: "#9aa7ff" },
+    swarm: { hp: 90, speed: 98, reward: 9, size: 9, color: "#ffd166" },
+    titan: { hp: 900, speed: 26, reward: 60, size: 18, color: "#6ee7b7" },
+    boss: { hp: 19200, speed: 22, reward: 1200, size: 22, color: "#ff3b3b" },
   };
 
   const ADMIN_AUTH = {
